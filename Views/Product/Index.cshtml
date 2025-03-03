@@ -1,0 +1,33 @@
+﻿@model List<CartManagementMVC.Models.Product>
+
+<h2>Product List</h2>
+
+<!-- Add Product Button -->
+<a href="@Url.Action("Create", "Product")" class="btn btn-primary">Add Product</a>
+
+<table class="table mt-3">
+    <tr>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Type</th>
+        <th>Actions</th>
+    </tr>
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>@product.ProductName</td>
+            <td>@product.Price</td>
+            <td>@product.ProductType</td>
+            <td>
+                <!-- Add to Cart Button -->
+                <form method="post" asp-action="AddToCart" asp-controller="Cart">
+                    <input type="hidden" name="productId" value="@product.ProductId" />
+                    <button type="submit" class="btn btn-primary">Add to Cart</button>
+                </form>
+            </td>
+        </tr>
+    }
+</table>
+
+<!-- View Cart Button -->
+<a href="@Url.Action("Index", "Cart")" class="btn btn-success">View Cart</a>
